@@ -4,15 +4,24 @@ import java.util.ArrayList;
 public class User{
     private String nombre;
     private int numero;
-    private ArrayList<Mascota> petIdList; 
-    private ArrayList<Consulta> consultasList;
+    private ArrayList<Mascota> userPetList; 
+    private ArrayList<Consulta> userConsultasList;
 
     public User(String nombre, int numero, ArrayList<Mascota> petIdList, ArrayList<Consulta> consultasList){
         this.nombre = nombre;
         this.numero = numero;
-        this. petIdList = new ArrayList<>();
-        this.consultasList = new ArrayList<>();
+        this.userPetList = new ArrayList<>();
+        this.userConsultasList = new ArrayList<>();
     }
+
+    public void addUserMascota(Mascota mascota){
+        userPetList.add(mascota);
+    }
+
+    public void addUserConsulta(Consulta consulta){
+        userConsultasList.add(consulta);
+    }
+
 
     public String getNombre(){
         return nombre;
@@ -23,11 +32,11 @@ public class User{
     }
 
     public ArrayList<Mascota> getPetIdList(){
-    return petIdList;
+    return userPetList;
     }
 
     public ArrayList<Consulta> getConsultasList(){
-        return consultasList;
+        return userConsultasList;
             }
 
 
