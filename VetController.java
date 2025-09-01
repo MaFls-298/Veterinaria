@@ -1,20 +1,38 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class VetController{
     private List<User> responsablesList;
     private List<Mascota> mascotasList;
     private List<Consulta> consultasList;
 
-    public VetController(List<User> responsableList, List<Mascota> mascotaList, List<Consulta> consultaList) {
-        this.responsablesList = new ArrayList<>();
-        this.mascotasList = new ArrayList<>();
-        this.consultasList = new ArrayList<>();
+    private final String userFile = "Users.csv";
+    private final String mascotasFile = "Mascotas.csv";
+
+    public VetController(){
+        responsablesList = new ArrayList<>();
+        mascotasList = new ArrayList<>();
+        consultasList = new ArrayList<>();
+
+        loadUsersCSV();
+        loadMascotasCSV();
+        
 
     }
 
     public void addUser(User responsable){
         responsablesList.add(responsable);
+        saveUsersToCSV();
+    }
+
+    public void delUser(User responsable){
+        responsablesList.remove(responsable);
+        mascotasList.removeIf(masc -> masc.getResponsable().equals(responsable));
+        saveUsersToCSV();
+        saveMascotasToCSV();
+
     }
 
     public void addMascota(User responsable, Mascota mascota){
@@ -22,8 +40,8 @@ public class VetController{
         mascotasList.add(mascota);
     }
 
-    public void addConsulta(Consulta c){
-        c.getResponsableCita().addUserConsulta(c);
+    public void addConsulta(Consulta consulta){
+        consulta.getResponsableCita().addUserConsulta(consulta);
     }
 
     public String sendReminder(User responsable, Consulta c) {
