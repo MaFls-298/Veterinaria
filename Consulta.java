@@ -11,17 +11,17 @@ public class Consulta{
     private Boolean consultaPendiente;
     
 
-    public Consulta(Mascota mascotaEnConsulta, User responsableCita, String motivoConsutla, LocalTime horaConsulta, LocalDate fechaConsulta, Boolean consultaPendiente){
+    public Consulta(Mascota mascotaEnConsulta, User responsableCita, String motivoConsutla, LocalTime horaConsulta, LocalDate fechaConsulta){
         this.mascotaEnConsulta = mascotaEnConsulta;
         this.responsableCita = responsableCita;
         this.motivoConsutla = motivoConsutla;
         this.horaConsulta = horaConsulta;
         this.fechaConsulta = fechaConsulta;
-        this.consultaPendiente = consultaPendiente;
+        this.consultaPendiente = true;
     }
 
 
-    public String mostrarInfoConsulta() {
+    public String showInfoConsulta() {
     return "• Responsable" + responsableCita + 
             "• Mascota" + mascotaEnConsulta + 
             "• Motivo" + motivoConsutla + 
@@ -46,5 +46,13 @@ public class Consulta{
 
     public LocalTime getHoraConsulta(){
         return horaConsulta;
+    }
+
+    public boolean isPendiente(){
+        return consultaPendiente;
+    }
+
+    public void marcarCompletada(){
+        this.consultaPendiente = false;
     }
 }
